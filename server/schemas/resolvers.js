@@ -43,6 +43,17 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addBook: async (parent, {userId, authors, title}, context ) => {
+      if (context.user) {
+        const updatedUser = await User.findOneAndUpdate(
+          {_id: userId},
+          { $push: { savedBooks: {authors, username: context.username}}},
+          { new: true, runValidations: true }
+        );
+        return updatedUser;
+      }
+      throw new AuthenticationError("Please login to save this book")
+    }
   },
 };
 

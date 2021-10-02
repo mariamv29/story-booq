@@ -33,6 +33,7 @@ type Query {
   type Mutation {
       login(email: String!, password: String!): Auth
       addUser(username: String!, email: String!, password: String!): Auth
+      addBook(userId: ID!, authors: [String!], title: String!): User
       }
   
   
