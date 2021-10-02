@@ -1,18 +1,22 @@
-const { User,  } = require('../models');
-
+const { User } = require("../models");
 
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find()
-      .select("-__v -password")
-      .populate("savedBooks")
+      return User.find().select("-__v -password").populate("savedBooks");
     },
-    user: async (parent, {username}) => {
-        return User.findOne({username})
+    user: async (parent, { username }) => {
+      return User.findOne({ username })
         .select("-__v -password")
-        .populate("savedBooks")
-    }
+        .populate("savedBooks");
+    },
+  },
+  Mutation: {
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      return user;
+    },
+    login: async () => {},
   },
 };
 
