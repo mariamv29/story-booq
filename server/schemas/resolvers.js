@@ -7,7 +7,7 @@ const resolvers = {
     me: async (parent, args, context) => {
       if (context.user) {
         const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
+          // .select("-__v -password")
           .populate("savedBooks");
 
         return userData;
@@ -43,12 +43,12 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addBook: async (parent, { input}, context ) => {
+    saveBook: async (parent, { input }, context ) => {
       if (context.user) {
-        const updatedUser = await User.findOneAndUpdate(
-          {_id: context.user._id},
-          { $push: { savedBooks: {input}}},
-          {new: true}
+        const updatedUser = await User.findByIdAndUpdate(
+          { _id: user._id},
+          { $addToSet: { savedBooks: input}},
+          {new: true }
         )
         return updatedUser;
       }
@@ -58,3 +58,20 @@ const resolvers = {
 };
 
 module.exports = resolvers;
+
+
+// mutation saveBook($input: bookInput!) {
+//   saveBook(input: $input) {
+//     _id
+//     # username
+//     # email
+//     savedBooks {
+//       bookId
+//       authors
+//       image
+//       description
+//       title
+//       link
+//     }
+//   }
+// }
