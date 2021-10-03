@@ -60,18 +60,3 @@ const resolvers = {
 module.exports = resolvers;
 
 
-// mutation saveBook($input: bookInput!) {
-//   saveBook(input: $input) {
-//     _id
-//     # username
-//     # email
-//     savedBooks {
-//       bookId
-//       authors
-//       image
-//       description
-//       title
-//       link
-//     }
-//   }
-// }
