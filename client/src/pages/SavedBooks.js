@@ -2,6 +2,7 @@ import React from 'react';
 import { useQuery } from "@apollo/client";
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
 import { QUERY_ME } from '../utils/queries';
+// import { REMOVE_BOOK}  from "../utils/mutations"
 // import { getMe, deleteBook } from '../utils/API';
 import Auth from '../utils/auth';
 import { removeBookId } from '../utils/localStorage';
@@ -9,7 +10,7 @@ import { removeBookId } from '../utils/localStorage';
 const SavedBooks = () => {
   // const [userData, setUserData] = useState({});
 
-
+  // const removeBook = useMutation(REMOVE_BOOK);
   const { loading, data } = useQuery(QUERY_ME);
   const userData = data?.me || [];
   console.log(userData);
@@ -23,7 +24,10 @@ const SavedBooks = () => {
   //   }
 
   //   try {
-  //     const response = await deleteBook(bookId, token);
+  //     const response = await removeBook({
+  //     variables: {id: bookId, token}
+  //     });
+  //   } 
 
   //     if (!response.ok) {
   //       throw new Error('something went wrong!');
@@ -38,7 +42,7 @@ const SavedBooks = () => {
   //   }
   // };
 
-  // if data isn't here yet, say so
+  // //if data isn't here yet, say so
   // if (!userDataLength) {
   //   return <h2>LOADING...</h2>;
   // }
@@ -65,7 +69,10 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
-                  <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
+                  <Button className='btn-block btn-danger' 
+                  // onClick={() => 
+                  //   handleDeleteBook(book.bookId)}
+                    >
                     Delete this Book!
                   </Button>
                 </Card.Body>
